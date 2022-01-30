@@ -1,44 +1,95 @@
 {% extends "base.html" %}
-
-
-{% block title %} {{title}} {% endblock title %}
-
-
+{% block title %}
+{{title}}
+{% endblock title %}
 {% block content %}
 
-    <div style="color:#ea2088; font-style: bold; font-size: 3rem; border-bottom: 1px solid white;">{{title}}</div> 
-    
-    <br>
-    
-    <form method="post">
-    
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        
+<div style="color:#12e7a0; font-style: bold; font-size: 3rem; border-bottom: 1px solid white;">{{title}}</div>
+
+<br>
+
+<form method="post">
+
+    {% csrf_token %} {{ form.non_field_errors }}
+
+
+    <fieldset>
+        <legend>Allgemein</legend>
         <div class="form-group">
-            {{ form.name.errors }}
-            <label for="{{ form.name.id_for_label }}">Name:</label>
-            {{ form.name }}
+            {{ form.grundmaterial.errors }}
+            <label for="{{ form.grundmaterial.id_for_label }}">Grundmaterial:</label> {{ form.grundmaterial }}
         </div>
-        <div class="form-group ">
-            {{ form.quantity.errors }}
-            <label for="{{ form.quantity.id_for_label }}">Quantity:</label>
-            {{ form.quantity }}
+        <div class="form-group">
+            {{ form.artikel.errors }}
+            <label for="{{ form.artikel.id_for_label }}">Artikel:</label> {{ form.artikel }}
         </div>
+        <div class="form-group">
+            {{ form.artikelnummer.errors }}
+            <label for="{{ form.artikelnummer.id_for_label }}">Artikelnummer:</label> {{ form.artikelnummer }}
+        </div>
+        <div class="form-group">
+            {{ form.hersteller.errors }}
+            <label for="{{ form.hersteller.id_for_label }}">Hersteller:</label> {{ form.hersteller }}
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Rest</legend>
+        <div class="form-group">
+            {{ form.artikelbezeichnung.errors }}
+            <label for="{{ form.artikelbezeichnung.id_for_label }}">Artikelbezeichnung:</label>
+            {{ form.artikelbezeichnung }}
+        </div>
+        <div class="form-group">
+            {{ form.fassung.errors }}
+            <label for="{{ form.fassung.id_for_label }}">Fassung:</label> {{ form.fassung }}
+        </div>
+        <div class="form-group">
+            {{ form.besonderheit.errors }}
+            <label for="{{ form.besonderheit.id_for_label }}">Besonderheit:</label> {{ form.besonderheit }}
+        </div>
+        <div class="form-group">
+            {{ form.form.errors }}
+            <label for="{{ form.form.id_for_label }}">Form:</label> {{ form.form }}
+        </div>
+        <div class="form-group">
+            {{ form.farbe.errors }}
+            <label for="{{ form.farbe.id_for_label }}">Farbe:</label> {{ form.farbe }}
+        </div>
+        <div class="form-group">
+            {{ form.zusatzmaterial.errors }}
+            <label for="{{ form.zusatzmaterial.id_for_label }}">Zusatzmaterial:</label> {{ form.zusatzmaterial }}
+        </div>
+        <div class="form-group">
+            {{ form.kette.errors }}
+            <label for="{{ form.kette.id_for_label }}">Kette:</label> {{ form.kette }}
+        </div>
+        <div class="form-group">
+            {{ form.legierung.errors }}
+            <label for="{{ form.legierung.id_for_label }}">Legierung:</label> {{ form.legierung }}
+        </div>
+        <div class="form-group">
+            {{ form.bestand.errors }}
+            <label for="{{ form.bestand.id_for_label }}">Bestand:</label> {{ form.bestand }}
+        </div>
+        <div class="form-group">
+            {{ form.herstellungskosten.errors }}
+            <label for="{{ form.herstellungskosten.id_for_label }}">Herstellungskosten:</label>
+            {{ form.herstellungskosten }}
+        </div>
+        <div class="form-group">
+            {{ form.verkaufspreis.errors }}
+            <label for="{{ form.verkaufspreis.id_for_label }}">Verkaufspreis:</label> {{ form.verkaufspreis }}
+        </div>
+    </fieldset>
+    <br>
 
-        <br>
+    <div class="align-middle">
+        <button type="submit" class="btn ghost-green">{{ savebtn }}</button> {% if title == "Neues Produkt" %}<button
+            type="reset" class="btn ghost-blue">Reset</button> {% endif %} {% if delbtn %}<a
+            href="{% url 'delete-stock' object.pk %}" class="btn ghost-red">Löschen</a> {% endif %}
+        <a href="{% url 'inventory' %}" class="btn ghost-button">Abbrechen</a>
+    </div>
 
-        <div class="align-middle">
-            <button type="submit" class="btn ghost-green">{{ savebtn }}</button>
-            {% if title == "New Stock" %}
-                <button type="reset" class="btn ghost-blue" >Reset</button>
-            {% endif %}
-            {% if delbtn %}
-                <a href="{% url 'delete-stock' object.pk %}" class="btn ghost-red"> Delete Stock </a>
-            {% endif %}
-            <a href="{% url 'inventory' %}" class="btn ghost-button">Cancel</a>
-        </div>
-        
-    </form>
+</form>
 
 {% endblock content %}
