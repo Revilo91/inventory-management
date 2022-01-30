@@ -85,9 +85,18 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "GoldRegenDB",
+        "USER": "Marina",
+        "PASSWORD": "h5m&FPcC1Hkk18^skSIhW$X6zS&wrs",
+        "HOST": "10.0.2.24",  # Or an IP Address that your DB is hosted on
+        "PORT": "3306",
+        "default-character-set": "utf8",
     }
 }
 

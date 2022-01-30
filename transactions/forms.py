@@ -1,11 +1,11 @@
 from django import forms
 from django.forms import formset_factory
 from .models import (
-    Supplier, 
-    PurchaseBill, 
+    Supplier,
+    PurchaseBill,
     PurchaseItem,
-    PurchaseBillDetails, 
-    SaleBill, 
+    PurchaseBillDetails,
+    SaleBill,
     SaleItem,
     SaleBillDetails
 )
@@ -16,7 +16,7 @@ from inventory.models import Stock
 class SelectSupplierForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['supplier'].queryset = Supplier.objects.filter(is_deleted=False)
+        self.fields['supplier'].queryset = Supplier.objects.all()
         self.fields['supplier'].widget.attrs.update({'class': 'textinput form-control'})
     class Meta:
         model = PurchaseBill
@@ -26,7 +26,7 @@ class SelectSupplierForm(forms.ModelForm):
 class PurchaseItemForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['stock'].queryset = Stock.objects.filter(is_deleted=False)
+        self.fields['stock'].queryset = Stock.objects.all()
         self.fields['stock'].widget.attrs.update({'class': 'textinput form-control setprice stock', 'required': 'true'})
         self.fields['quantity'].widget.attrs.update({'class': 'textinput form-control setprice quantity', 'min': '0', 'required': 'true'})
         self.fields['perprice'].widget.attrs.update({'class': 'textinput form-control setprice price', 'min': '0', 'required': 'true'})
@@ -89,7 +89,7 @@ class SaleForm(forms.ModelForm):
 class SaleItemForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['stock'].queryset = Stock.objects.filter(is_deleted=False)
+        self.fields['stock'].queryset = Stock.objects.all()
         self.fields['stock'].widget.attrs.update({'class': 'textinput form-control setprice stock', 'required': 'true'})
         self.fields['quantity'].widget.attrs.update({'class': 'textinput form-control setprice quantity', 'min': '0', 'required': 'true'})
         self.fields['perprice'].widget.attrs.update({'class': 'textinput form-control setprice price', 'min': '0', 'required': 'true'})
