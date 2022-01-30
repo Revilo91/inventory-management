@@ -6,7 +6,7 @@
 
 {% block content %}
 
-    {% if not user.is_authenticated %}
+{% if not user.is_authenticated %}
 <br>
 <a href="{% url 'home' %}" class="btn ghost-button">Go Back</a>
 {% endif %}
